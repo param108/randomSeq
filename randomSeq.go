@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"os"
-	"strconv"
 	"time"
 )
 
@@ -26,8 +24,8 @@ func generateString(length int) string {
 }
 
 func runPattern(state *State, length int) {
-	for i := 0; i < length; i++ {
-		fmt.Print(string(state.Pattern[state.Index]))
+	for {
+		fmt.Print(string(state.Pattern[state.Index]) + "\n")
 		state.Index++
 		if state.Index >= len(state.Pattern) {
 			state.Index = 0
@@ -39,8 +37,7 @@ func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	length := (rand.Int() % 145) + 5
 	offset := (rand.Int() % length)
-	repeat, _ := strconv.Atoi(os.Args[1])
 	state := &State{generateString(length), offset}
-	runPattern(state, repeat)
+	runPattern(state, 10)
 }
 
